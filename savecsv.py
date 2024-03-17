@@ -1,15 +1,17 @@
-import org.apache.spark.sql.SparkSession
+from pyspark.sql import SparkSession
 
-val spark = SparkSession.builder()
-  .appName("Parquet to CSV Conversion")
-  .getOrCreate()
+# Create a SparkSession
+spark = SparkSession.builder \
+    .appName("Parquet to CSV Conversion") \
+    .getOrCreate()
 
-// Read the Parquet file
-val parquetDF = spark.read.parquet("/user/maria_dev/dip")
+# Read the Parquet file
+parquet_df = spark.read.parquet("/user/maria_dev/dip")
 
-// Write the DataFrame to a CSV file
-parquetDF.write
-  .option("header", "true") // Write header in the CSV file
-  .csv("/user/maria_dev/dip_csv")
+# Write the DataFrame to a CSV file
+parquet_df.write \
+    .option("header", "true") \  # Write header in the CSV file
+    .csv("/user/maria_dev/dip_csv")
 
+# Stop the SparkSession
 spark.stop()
