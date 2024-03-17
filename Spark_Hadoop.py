@@ -14,7 +14,7 @@ myschema = StructType([\
 
 people = spark.read.format("csv")\
     .schema(myschema)\
-    .option("path","hdfs:///user/maria_dev/spark/friends.csv")\
+    .option("path","hdfs:///user/spark/friends.csv")\
     .load()
 
 people.printSchema()
@@ -30,7 +30,7 @@ spark.sql("select userID, name from peoples where friends > 100 order by userID"
 
 output.write\
 .format("json").mode("overwrite")\
-.option("path", "hdfs:///user/maria_dev/spark/job_output/")\
+.option("path", "hdfs:///user/spark/job_output/")\
 .partitionBy("age")\
 .save()
 
